@@ -10,7 +10,7 @@ namespace ConsoleLogin
         {
             // BrandTest();
             // CarTest();
-            ColorTest();
+            ColorTest(); 
         }
 
         private static void ColorTest()
