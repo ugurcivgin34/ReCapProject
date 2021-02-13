@@ -16,13 +16,13 @@ namespace ConsoleLogin
 
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
-            //rentalManager.Add(new Rental()
-            //{
+            rentalManager.Add(new Rental()
+            {
 
-            //    CarId = 3,
-            //    CustomerId = 12,
-            //    RentDate = DateTime.Now
-            //});
+                CarId = 3,
+                CustomerId = 12,
+                RentDate = DateTime.Now
+            });
 
             //rentalManager.Delete(2002);
 
@@ -36,7 +36,7 @@ namespace ConsoleLogin
 
             //rentalManager.Add(addRental);
 
-            rentalManager.Deliver(4);
+            //rentalManager.Deliver(4);
 
             foreach (var rental in rentalManager.GetAll().Data)
             {
