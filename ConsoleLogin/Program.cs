@@ -1,5 +1,6 @@
 ﻿using Business.Concrete;
 using DataAccess.Create.EntityFramework;
+using Entities.Concrete;
 using System;
 
 namespace ConsoleLogin
@@ -9,8 +10,42 @@ namespace ConsoleLogin
         static void Main(string[] args)
         {
             // BrandTest();
-             CarTest();
+             //CarTest();
             //ColorTest(); 
+
+
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+
+            //rentalManager.Add(new Rental()
+            //{
+
+            //    CarId = 3,
+            //    CustomerId = 12,
+            //    RentDate = DateTime.Now
+            //});
+
+            //rentalManager.Delete(2002);
+
+            //Rental addRental = new Rental()
+            //{
+            //    CarId = 3,
+            //    CustomerId = 13,
+            //    RentDate = new DateTime(2016, 7, 9)
+
+            //};
+
+            //rentalManager.Add(addRental);
+
+            rentalManager.Deliver(4);
+
+            foreach (var rental in rentalManager.GetAll().Data)
+            {
+                Console.WriteLine(rental.CarId + " " + rental.CustomerId + " " + rental.RentalId + " " + rental.RentDate + " " + rental.ReturnDate);
+            }
+            //foreach (var item in rentalManager.GetAvailableCars().Data)
+            //{
+            //    Console.WriteLine(item.RentalId + "/" + item.CarId + "/" + item.CustomerId + "/" + item.RentDate);
+            //}
         }
 
         //private static void ColorTest()
