@@ -15,9 +15,9 @@ namespace Business.Constans
 
         public static string BrandAdded = "Marka eklendi";
         public static string BrandNameInvalid = "Marka ismi geçersiz";
-        public static string BradnsListed = "Markalar listelendi";
+        public static string BrandListed = "Markalar listelendi";
         public static string BrandDeleted = "Marka eklendi";
-        public static string BradnUpdated = "Marka eklendi";
+        public static string BrandUpdated = "Marka eklendi";
 
         public static string ColorAdded = "Renk eklendi";
         public static string ColorNameInvalid = "Renk ismi geçersiz";

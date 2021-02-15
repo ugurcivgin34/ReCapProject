@@ -22,13 +22,13 @@ namespace Business.Concrete
         public IResult Add(Color color)
         {
             _colorDal.Add(color);
-            return new SuccessResult(Messages.CarAdded);
+            return new SuccessResult(Messages.ColorAdded);
         }
 
         public IResult Delete(int id)
         {
             _colorDal.Delete(p => p.ColorId == id);
-            return new SuccessResult(Messages.CarDeleted);
+            return new SuccessResult(Messages.ColorDeleted);
         }
 
         public IDataResult <List<Color>> GetAll()
@@ -44,7 +44,7 @@ namespace Business.Concrete
         public IResult Update(Color color)
         {
             _colorDal.Update(color);
-            return new SuccessResult(Messages.BradnUpdated);
+            return new SuccessResult(Messages.ColorUpdated);
         }
     }
 }
