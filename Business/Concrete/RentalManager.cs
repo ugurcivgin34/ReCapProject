@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete
 {
@@ -21,6 +23,8 @@ namespace Business.Concrete
         {
             _rentalDal = rental;
         }
+
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
             var result = _rentalDal.GetAll(p => p.CarId == rental.CarId && rental.ReturnDate == null);

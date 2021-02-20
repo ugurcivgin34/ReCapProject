@@ -1,6 +1,9 @@
 ﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
+using Castle.DynamicProxy;
+using Core.Utilities.Interceptors;
 using DataAccess.Abstract;
 using DataAccess.Create.EntityFramework;
 using System;
@@ -10,7 +13,7 @@ using System.Text;
 namespace Business.DependencyResolvers.Autofac
 {
     public class AutofacBusinessModule : Module  //Işıktan autofac olanı seçtik module u getirmek için
-        //Sonuçta burası method lojik ifadeler de kullanabilirsin(if gibi)
+                                                 //Sonuçta burası method lojik ifadeler de kullanabilirsin(if gibi)
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -32,6 +35,13 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
 
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+
+            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
+                .EnableInterfaceInterceptors(new ProxyGenerationOptions()
+                {
+                    Selector = new AspectInterceptorSelector()
+                }).SingleInstance();
 
 
         }
