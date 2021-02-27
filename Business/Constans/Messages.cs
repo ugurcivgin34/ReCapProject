@@ -37,6 +37,6 @@ namespace Business.Constans
         public static string RentalBusy = "Araç Suan Kullanımda";
         public static string RentalUpdated = "Arac Bilgisi Tabloda güncellendi";
         public static string NoRecording = "Kayıt Bulunamadı";
-
+        internal static string FailAddedImageLimit;
     }
 }

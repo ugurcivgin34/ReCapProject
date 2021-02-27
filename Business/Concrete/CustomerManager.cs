@@ -24,7 +24,7 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public IResult Delete(int id)
+        public IResult Delete(Customer customer)
         {
             throw new NotImplementedException();
         }

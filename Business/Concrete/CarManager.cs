@@ -31,10 +31,11 @@ namespace Business.Concrete
             return new ErrorResult(Messages.CarNameInvalid);
             
         }
-
-        public IResult Delete(int id)
+        [ValidationAspect(typeof(CarValidator))]
+        public IResult Delete(Car car)
         {
-            _carDal.Delete(p => p.Id == id);
+            //_carDal.Delete(p => p.Id == id);
+            _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
         }
 
@@ -63,6 +64,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ColorId == id));
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
              _carDal.Update(car);

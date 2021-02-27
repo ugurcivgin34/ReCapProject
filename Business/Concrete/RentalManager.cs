@@ -10,6 +10,7 @@ using System.Text;
 using System.Linq;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 
 namespace Business.Concrete
 {
@@ -27,31 +28,24 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-            var result = _rentalDal.GetAll(p => p.CarId == rental.CarId && rental.ReturnDate == null);
-            if (result.Count>0)
+            IResult result = BusinessRules.Run(
+                CheckIfCar(rental));
+            if (result!=null)
             {
-                return new ErrorResult(Messages.RentalBusy);
+                return result;
             }
+           
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
            
   
         }
 
-        public IResult Delete(int id)
+        public IResult Delete(Rental rental)
         {
-            var result = _rentalDal.Get(p => p.CarId == id);
-            if(result == null)
-            {
-                return new SuccessResult(Messages.NoRecording);
 
-            }
-            if (result.ReturnDate==null)
-            {
-                return new SuccessResult(Messages.RentalBusy);
-            }
-            _rentalDal.Delete(p => p.CarId == id);
-            return new SuccessResult(Messages.RentalDeleted);
+            _rentalDal.Delete(rental);
+            return new SuccessResult();
         }
 
         public IResult Deliver(int rentalId)
@@ -87,5 +81,30 @@ namespace Business.Concrete
             _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUpdated);
         }
+
+        private IResult CheckIfCar(Rental rental)
+        {
+            var result = _rentalDal.GetAll(p => p.CarId == rental.CarId && rental.ReturnDate == null);
+            if (result.Count > 0)
+            {
+                return new ErrorResult(Messages.RentalBusy);
+            }
+            return new SuccessResult();
+        }
+        private IResult CheckIfDelete(int Id)
+        {
+            var result = _rentalDal.Get(p => p.RentalId == Id);
+            if(result==null)
+            {
+                return new ErrorResult(Messages.NoRecording);
+            }
+            if (result.ReturnDate==null)
+            {
+                return new ErrorResult(Messages.RentalBusy);
+            }
+            return new SuccessResult();
     }
+    }
+
+    
 }

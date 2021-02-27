@@ -1,7 +1,9 @@
 ﻿using Business.Concrete;
 using DataAccess.Create.EntityFramework;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using System;
+using System.IO;
 
 namespace ConsoleLogin
 {
@@ -9,20 +11,38 @@ namespace ConsoleLogin
     {
         static void Main(string[] args)
         {
+            var sourcepath = Path.GetTempFileName();
+            Console.WriteLine(sourcepath);
+
+            //string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).FullName + @"\Images");
+            //Console.WriteLine(path);
+
+
+            //string fileName = @"C:\mydir.old\myfile.ext";
+            //string path = @"C:\mydir.old\---";
+            //string extension;
+
+            //extension = Path.GetExtension(fileName);
+            //Console.WriteLine();
+
+
+            //extension = Path.GetExtension(path);
+            //Console.WriteLine(extension);
+
             // BrandTest();
-             //CarTest();
+            //CarTest();
             //ColorTest(); 
 
 
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            //RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
-            rentalManager.Add(new Rental()
-            {
+            //rentalManager.Add(new Rental()
+            //{
 
-                CarId = 3,
-                CustomerId = 12,
-                RentDate = DateTime.Now
-            });
+            //    CarId = 3,
+            //    CustomerId = 12,
+            //    RentDate = DateTime.Now
+            //});
 
             //rentalManager.Delete(2002);
 
@@ -38,10 +58,10 @@ namespace ConsoleLogin
 
             //rentalManager.Deliver(4);
 
-            foreach (var rental in rentalManager.GetAll().Data)
-            {
-                Console.WriteLine(rental.CarId + " " + rental.CustomerId + " " + rental.RentalId + " " + rental.RentDate + " " + rental.ReturnDate);
-            }
+            //foreach (var rental in rentalManager.GetAll().Data)
+            //{
+            //    Console.WriteLine(rental.CarId + " " + rental.CustomerId + " " + rental.RentalId + " " + rental.RentDate + " " + rental.ReturnDate);
+            //}
             //foreach (var item in rentalManager.GetAvailableCars().Data)
             //{
             //    Console.WriteLine(item.RentalId + "/" + item.CarId + "/" + item.CustomerId + "/" + item.RentDate);
@@ -61,10 +81,10 @@ namespace ConsoleLogin
         //    }
         //}
 
-        private static void CarTest()
-        {
-            CarManager carManager = new CarManager(new EfCarDal());
-            var result = carManager.GetAll();
+        //private static void CarTest()
+        //{
+        //    CarManager carManager = new CarManager(new EfCarDal());
+        //    var result = carManager.GetAll();
             //foreach (var car in carManager.GetCarDetail())
             //{
             //    Console.WriteLine(car.BrandName + " " + car.CarName + " " + car.ColorName + " " + car.DailyPrice);
@@ -105,6 +125,6 @@ namespace ConsoleLogin
         //    {
         //        Console.WriteLine(brand.BrandId + " " + brand.BrandName);
         //    }
-        }
+        //}
     }
 }
