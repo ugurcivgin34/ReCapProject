@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Core.Entities.Concorete;
+using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constans
@@ -37,6 +39,13 @@ namespace Business.Constans
         public static string RentalBusy = "Araç Suan Kullanımda";
         public static string RentalUpdated = "Arac Bilgisi Tabloda güncellendi";
         public static string NoRecording = "Kayıt Bulunamadı";
-        internal static string FailAddedImageLimit;
+        public static string FailAddedImageLimit;
+        public static string UserRegistered = "Kayıt Oldu";
+        public static string UserNotFound = "Kullanıcı Bulunamadı";
+        public static string PasswordError = "Parola Hatası";
+        public static string SuccessfulLogin = "Başarılı Giriş";
+        public static string AccessTokenCreated = "Token oluşturuldu";
+        public static string UserAlreadyExists = "Kullanıcı Mevcut";
+        public static string AuthorizationDenied = "Yetkiniz Yok";
     }
 }

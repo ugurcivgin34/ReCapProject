@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Core.Entities.Concorete;
+using FluentValidation;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    class UserValidator
+    public class UserValidator: AbstractValidator<User>
     {
     }
 }

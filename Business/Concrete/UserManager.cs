@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Entities.Concorete;
+using Core.Entities.Concrete;
 using Core.Utilities;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -21,27 +23,40 @@ namespace Business.Concrete
         [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user)
         {
-            throw new NotImplementedException();
+            _userDal.Add(user);
+            return new SuccessResult("Kullanıcı eklendi");
         }
 
         public IResult Delete(User user)
         {
-            throw new NotImplementedException();
+            _userDal.Delete(user);
+            return new SuccessResult("Kullanıcı silindi");
         }
 
         public IDataResult<List<User>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(), "Sıralanadı");
         }
 
         public IDataResult<User> GetById(int id)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<User>(_userDal.Get(p => p.Id == id),"Id ye göre getirildi");
+        }
+
+        public IDataResult<User> GetByMail(string email)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+        }
+
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        {
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user),"Roller geldi");
         }
 
         public IResult Update(User user)
         {
-            throw new NotImplementedException();
+            _userDal.Update(user);
+            return new SuccessResult("Kullanıcı güncellendi");
         }
     }
 }

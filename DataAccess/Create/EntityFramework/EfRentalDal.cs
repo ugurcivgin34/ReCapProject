@@ -23,7 +23,7 @@ namespace DataAccess.Create.EntityFramework
                             join cu in context.Customers
                             on re.CustomerId equals cu.UserId
                             join us in context.Users
-                            on cu.UserId equals us.UserId
+                            on cu.UserId equals us.Id
                             select new DtoRentalDetail
                             {
                                 Id = re.CarId,
