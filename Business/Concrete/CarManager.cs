@@ -1,7 +1,10 @@
 ﻿using Business.Abstract;
 using Business.BusinessAspects;
+using Business.BusinessAspects.Autofac;
 using Business.Constans;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcers.Validation;
 using Core.Utilities;
@@ -23,8 +26,10 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-        [SecuredOperation("product.add,admin")]
-        [ValidationAspect(typeof(CarValidator))]
+
+        [SecuredOperation("car.add,admin")]
+        //[ValidationAspect(typeof(CarValidator))]
+        //[CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
             ValidationTool.Validate(new CarValidator(), car);
@@ -33,6 +38,21 @@ namespace Business.Concrete
             return new ErrorResult(Messages.CarNameInvalid);
             
         }
+
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Car car)
+        {
+            Add(car);
+            if (car.DailyPrice < 10)
+            {
+                throw new Exception("");
+            }
+            Add(car);
+            return null;
+        }
+    
+
+
         [ValidationAspect(typeof(CarValidator))]
         public IResult Delete(Car car)
         {
@@ -41,11 +61,13 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarDeleted);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
              return new SuccessDataResult <List<Car>>(_carDal.GetAll().ToList(),Messages.CarsListed);
         }
 
+        [CacheAspect]
         public IDataResult <Car> GetCarById(int id)
         {
             return new SuccessDataResult <Car> (_carDal.Get(p => p.Id == id));
@@ -67,6 +89,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
         {
              _carDal.Update(car);

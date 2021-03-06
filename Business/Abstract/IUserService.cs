@@ -1,4 +1,4 @@
-﻿using Core.Entities.Concorete;
+﻿
 using Core.Entities.Concrete;
 using Core.Utilities;
 using Core.Utilities.Results;

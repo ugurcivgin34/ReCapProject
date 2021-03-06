@@ -1,7 +1,5 @@
-﻿using Core.Entities.Concorete;
-using Core.Entities.Concrete;
+﻿using Core.Entities.Concrete;
 using Core.Extensions;
-
 using Core.Utilities.Security.Encryption;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -17,13 +15,13 @@ namespace Core.Utilities.Security.JWT
 
     public class JwtHelper : ITokenHelper
     {
-        public IConfiguration Configuration { get; } //IConfiguration api deki appsettingsdeki değerleri okumaya yarıyor
+        public IConfiguration Configuration { get; } // sizin apinizde ki appsettings okumana yarıyor
         private TokenOptions _tokenOptions;
         private DateTime _accessTokenExpiration;
         public JwtHelper(IConfiguration configuration)
         {
             Configuration = configuration;
-            _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();  //appsetingges deki topkenoption bölümünü al ve tokenoption sınıflarıyla mappingle 
+            _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
         }
         public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)

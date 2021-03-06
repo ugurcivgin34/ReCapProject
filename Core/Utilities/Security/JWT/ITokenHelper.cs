@@ -1,4 +1,4 @@
-﻿using Core.Entities.Concorete;
+﻿
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using System;
@@ -9,6 +9,7 @@ namespace Core.Utilities.Security.JWT
 {
     public interface ITokenHelper
     {
+
         AccessToken CreateToken(User user, List<OperationClaim> operationClaims);
     }
 }

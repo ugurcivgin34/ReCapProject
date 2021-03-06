@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Entities.Concorete
+namespace Core.Entities.Concrete
 
     
 {

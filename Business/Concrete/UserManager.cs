@@ -1,7 +1,7 @@
 ﻿using Business.Abstract;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
-using Core.Entities.Concorete;
+
 using Core.Entities.Concrete;
 using Core.Utilities;
 using Core.Utilities.Results;

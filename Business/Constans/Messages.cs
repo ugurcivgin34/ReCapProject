@@ -1,4 +1,4 @@
-﻿using Core.Entities.Concorete;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;

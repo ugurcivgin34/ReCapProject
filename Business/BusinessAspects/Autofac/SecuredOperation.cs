@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Business.BusinessAspects
+namespace Business.BusinessAspects.Autofac
 {
     public class SecuredOperation : MethodInterception
     {
@@ -17,7 +17,7 @@ namespace Business.BusinessAspects
         private string[] _roles;
         private IHttpContextAccessor _httpContextAccessor;  //json web token isteği yapılınca göndererek yani,oraya binlerce kişi istek yapabilir.Her istek için bir httpcontext oluşur.Thread oluşlur yani.
 
-        public SecuredOperation(string roles)
+        public SecuredOperation(string roles)  //rolleri virgülle ayırarak getirebiliyoruz anca.Attirubte çünkü
         {
             _roles = roles.Split(',');
             _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();

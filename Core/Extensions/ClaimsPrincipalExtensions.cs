@@ -1,18 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 
 namespace Core.Extensions
 {
     public static class ClaimsPrincipalExtensions
     {
-        public static List<string> Claims(this ClaimsPrincipal claimsPrincipal, string claimType)
+        public static List<string> Claims(this ClaimsPrincipal claimsPrincipal, string claimType) //o andaki jwt ile gelen kişinin claimlerine erişmek için kullandık
         {
             var result = claimsPrincipal?.FindAll(claimType)?.Select(x => x.Value).ToList();
             return result;
         }
 
-        public static List<string> ClaimRoles(this ClaimsPrincipal claimsPrincipal)
+        public static List<string> ClaimRoles(this ClaimsPrincipal claimsPrincipal) //direk rolleri getir diyorsun kabaca
         {
             return claimsPrincipal?.Claims(ClaimTypes.Role);
         }
