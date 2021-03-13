@@ -25,10 +25,13 @@ namespace DataAccess.Create.EntityFramework
                              on c.ColorId equals co.ColorId
                              select new CarDetailDto
                              {
+                                 Id = c.Id,
                                  BrandName = b.BrandName,
                                  CarName = c.Descriptions,
                                  ColorName = co.ColorName,
-                                 DailyPrice=c.DailyPrice
+                                 DailyPrice = c.DailyPrice,
+                                 ModelYear = c.ModelYear
+                                
                 
                              };
                              

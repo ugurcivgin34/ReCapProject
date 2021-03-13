@@ -11,6 +11,7 @@ using System.Linq;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -69,6 +70,11 @@ namespace Business.Concrete
         public IDataResult<Rental> GetById(int id)
         {
             return new SuccessDataResult<Rental>(_rentalDal.Get(p => p.CarId == id));
+        }
+
+        public IDataResult<List<DtoRentalDetail>> GetRentalDto()
+        {
+            return new SuccessDataResult<List<DtoRentalDetail>>(_rentalDal.GetRentalDetails());
         }
 
         public IDataResult<List<Rental>> GetUnAvailableCars()

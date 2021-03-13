@@ -21,7 +21,7 @@ namespace DataAccess.Create.EntityFramework
                             join ca in context.Cars
                             on re.CarId equals ca.Id
                             join cu in context.Customers
-                            on re.CustomerId equals cu.UserId
+                            on re.CustomerId equals cu.CustomerId
                             join us in context.Users
                             on cu.UserId equals us.Id
                             select new DtoRentalDetail
@@ -31,7 +31,8 @@ namespace DataAccess.Create.EntityFramework
                                 CompanyName = cu.CompanyName,
                                 RentDate = re.RentDate,
                                 ReturnDate = re.ReturnDate,
-                                UserName = us.FirstName + " " + us.LastName,
+                                FirstName = us.FirstName,
+                                LastName = us.LastName,
                                 DailyPrice = ca.DailyPrice
                             };
                 return result.ToList();
