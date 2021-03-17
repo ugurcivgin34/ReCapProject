@@ -78,15 +78,26 @@ namespace Business.Concrete
             return new SuccessDataResult <List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 
-        public IDataResult <List<Car>> GetCarsByBrandId(int id)
+        public IDataResult<List<CarDetailDto>> GetCarDetailById(int carId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == id));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(p => p.Id == carId));
         }
 
-        public IDataResult <List<Car>> GetCarsByColorId(int id)
+        [CacheAspect]
+        public IDataResult<List<CarDetailDto>> GetCarsDetailByBrandId(int BrandId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ColorId == id));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(p => p.BrandId == BrandId));
+
         }
+
+        [CacheAspect]
+        public IDataResult<List<CarDetailDto>> GetCarsByColorId(int ColorId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorId == ColorId));
+
+        }
+
+       
 
         [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("ICarService.Get")]
@@ -95,5 +106,7 @@ namespace Business.Concrete
              _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
         }
+
+        
     }
 }

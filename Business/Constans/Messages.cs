@@ -47,5 +47,8 @@ namespace Business.Constans
         public static string AccessTokenCreated = "Token oluşturuldu";
         public static string UserAlreadyExists = "Kullanıcı Mevcut";
         public static string AuthorizationDenied = "Yetkiniz Yok";
+        internal static string CarImageListed;
+        internal static string CarImageAdded;
+        internal static string CarImageUpdated;
     }
 }

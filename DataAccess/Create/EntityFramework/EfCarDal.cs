@@ -12,9 +12,9 @@ using System.Linq.Expressions;
 
 namespace DataAccess.Create.EntityFramework
 {
-    public class EfCarDal : EfEntityRepositoryBase <Car,ReCapProjectContext>, ICarDal
+    public class EfCarDal : EfEntityRepositoryBase<Car, ReCapProjectContext>, ICarDal
     {
-        public List<CarDetailDto> GetCarDetails()
+        public List<CarDetailDto> GetCarDetails(Expression<Func<CarDetailDto, bool>> filter = null)
         {
             using (ReCapProjectContext context = new ReCapProjectContext())
             {
@@ -26,25 +26,24 @@ namespace DataAccess.Create.EntityFramework
                              select new CarDetailDto
                              {
                                  Id = c.Id,
+                                 Description = c.Descriptions,
                                  BrandName = b.BrandName,
-                                 CarName = c.Descriptions,
+                                 BrandId = b.BrandId,
+                                 ColorId = co.ColorId,
                                  ColorName = co.ColorName,
                                  DailyPrice = c.DailyPrice,
-                                 ModelYear = c.ModelYear
-                                
-                
+                                 ModelYear = c.ModelYear,
+                                 ImagePath = (from a in context.CarImages where a.CarId == c.Id select a.ImagePath).FirstOrDefault()
+
                              };
-                             
-                return result.ToList();
+                return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
         }
-
-
     }
-    
-        
-	
 
-	
-    
+
+
+
+
+
 }
